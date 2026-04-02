@@ -18,7 +18,15 @@ MODEL_ID = "gemini-2.5-flash"
 
 # Check if we are running on Railway. If yes, save to the permanent /data drive.
 # If running locally on your computer, just save them in the current folder (".").
+# --- CONFIGURATION ---
+API_KEY = os.environ.get("GEMINI_API_KEY") 
+MODEL_ID = "gemini-2.5-flash" 
+
 DATA_DIR = "/data" if os.environ.get("RAILWAY_ENVIRONMENT") else "."
+
+# --- ADD THIS NEW LINE ---
+# This forces the computer to create the /data folder if it's missing!
+os.makedirs(DATA_DIR, exist_ok=True) 
 
 USERS_DB_FILE = os.path.join(DATA_DIR, "users_db.json")
 CHATS_DB_FILE = os.path.join(DATA_DIR, "chats_db.json")
