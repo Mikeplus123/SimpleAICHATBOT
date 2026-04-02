@@ -12,7 +12,7 @@ from google.genai import types
 # --- CONFIGURATION ---
 # --- CONFIGURATION ---
 # This tells Python to look for a secret variable on the Railway server
-API_KEY = os.environ.get("API_KEY") 
+API_KEY = os.environ.get("GEMINI_API_KEY") 
 MODEL_ID = "gemini-2.5-flash"
 
 USERS_DB_FILE = "users_db.json"
