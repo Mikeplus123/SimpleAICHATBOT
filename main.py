@@ -218,4 +218,7 @@ async def websocket_endpoint(websocket: WebSocket, chat_id: str, user: str = Que
         pass
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    # Get the port from the cloud environment, or use 8000 locally
+    port = int(os.environ.get("PORT", 8000))
+    # 0.0.0.0 tells the server to accept connections from the outside internet
+    uvicorn.run(app, host="0.0.0.0", port=port)
