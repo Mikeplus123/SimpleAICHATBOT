@@ -12,11 +12,16 @@ from google.genai import types
 # --- CONFIGURATION ---
 # --- CONFIGURATION ---
 # This tells Python to look for a secret variable on the Railway server
+# --- CONFIGURATION ---
 API_KEY = os.environ.get("GEMINI_API_KEY") 
-MODEL_ID = "gemini-2.5-flash"
+MODEL_ID = "gemini-2.5-flash" 
 
-USERS_DB_FILE = "users_db.json"
-CHATS_DB_FILE = "chats_db.json"
+# Check if we are running on Railway. If yes, save to the permanent /data drive.
+# If running locally on your computer, just save them in the current folder (".").
+DATA_DIR = "/data" if os.environ.get("RAILWAY_ENVIRONMENT") else "."
+
+USERS_DB_FILE = os.path.join(DATA_DIR, "users_db.json")
+CHATS_DB_FILE = os.path.join(DATA_DIR, "chats_db.json")
 
 app = FastAPI()
 client = genai.Client(api_key=API_KEY)
