@@ -302,7 +302,13 @@
         }
 
         function connectWebSocket(chatId) {
-            ws = new WebSocket(`ws://localhost:8000/ws/${chatId}?user=${currentUser}`);
+            // Dynamically figure out the URL for Railway or Localhost
+            const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+            const host = window.location.host;
+            const wsUrl = `${protocol}//${host}/ws/${chatId}?user=${currentUser}`;
+            
+            ws = new WebSocket(wsUrl);
+            
             ws.onmessage = function(event) {
                 if (event.data === "<END_OF_STREAM>") {
                     currentBotMessageDiv = null; 
